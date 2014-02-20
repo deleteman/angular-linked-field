@@ -1,0 +1,146 @@
+<!doctype html>
+<html ng-app="Test" >
+<head>
+  <title>Linked Field directive - Demo page</title>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" ></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script> 
+  <script type="text/javascript" src="angular-linked-field.js" ></script>
+
+  <script type="text/javascript">
+    angular.module('Test', ['linkedField']);
+    function shuffle(array) {
+      var counter = array.length, temp, index;
+
+      // While there are elements in the array
+      while (counter > 0) {
+          // Pick a random index
+          index = Math.floor(Math.random() * counter);
+
+          // Decrease counter by 1
+          counter--;
+
+          // And swap the last element with it
+          temp = array[counter];
+          array[counter] = array[index];
+          array[index] = temp;
+      }
+
+      return array;
+    }
+
+
+    function TestCtrl($scope) {
+      var translate = {
+        'a': '4',
+        'b': 'B',
+        'c': '(',
+        'd': 'D',
+        'e': '3',
+        'f': 'Ph',
+        'g': '9',
+        'h': '|-|',
+        'i': '1',
+        'j': 'J',
+        'k': '|<',
+        'l': 'L',
+        'm': '/\/\\',
+        'n': '|\\|',
+        'o': '0',
+        'p': 'P',
+        'q': 'Q',
+        'r': 'R',
+        's': '5',
+        't': '7',
+        'u': 'U',
+        'v': '\\/',
+        'w': '\\/\\/',
+        'x': '><',
+        'y': '\'/',
+        'z': 'Z'
+      }
+      $scope.filterFunction = function(val) {
+        var chars = val.toLowerCase().split('');
+        var leetChars = [];
+        for(var i  = 0; i < chars.length; i++) {
+          if( translate[chars[i]] )
+            leetChars.push(translate[chars[i]]);
+          else 
+            leetChars.push(chars[i]);
+        } 
+        $(this).val(leetChars.join(''));
+      }
+      
+    }
+    
+  </script>
+  <style>
+    body {
+     font-size:12px;
+     font-family: "Verdana", "Arial";
+     color: #444;
+     background: #999;
+    }
+
+    h1 {
+      font-size: 500%;
+      color: #37364D;
+      border-bottom: 1px solid #444;
+      text-shadow: 1px 1px 1px #444;
+    }
+    h1 small {
+      font-size: 50%;
+      color: #ddd;
+    }
+    .wrapper {
+      width: 70%;
+      margin: 0 auto;
+    }
+
+    #explanation {
+      font-size: 20px;
+      color: #ddd;
+      text-shadow: 1px 1px 1px #444;
+      border: 1px solid #444;
+      padding: 10px;
+      box-shadow: 1px 1px 1px;
+   }
+  h2 {
+    font-size: 200%;
+    border-bottom: 1px solid #444;
+    text-shadow: 1px 1px 1px #ddd;
+    color: rgb(139, 57, 28);
+  }
+
+  label {
+    font-weight: bold;
+    display: block;
+    font-size: 25px;
+  }
+
+  textarea {
+    width: 100%;
+    height: 100px;
+  }
+
+  </style>
+</head>
+<body ng-controller="TestCtrl" >
+  <div class="wrapper">
+    <h1>Linked-Field directive <small>(Demo Page)</small></h1>
+    <p id="explanation">Below is a very simple example of the usage of this directive. The first text area is linked to the second one, so everytime the first one gets a 'keyup' event, it'll run the method 'filterFunction'. This method receives the current value of the field, filters it and assigns the resulting text to the second filter
+    </p>
+    <p>
+      <h2>Leet Speak converter</h2>
+      <div class="form-elem">
+        <label for="text">Your input:</label>
+        <textarea id="text" linked-field linked-with="shuffled_text" link-event="keyup" link-method="filterFunction" placeholder="Enter any text..."></textarea>
+      </div>
+      <div class="form-elem">
+        <label for="shuffled_text">L337 5p34|&lt; output:</label>
+        <textarea id="shuffled_text" disabled></textarea>
+      </div> 
+    </p>
+  </div> 
+</body>
+</html>
+ 

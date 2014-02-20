@@ -1,0 +1,11 @@
+{
+  "name": "angular-linked-field",
+  "author": "Fernando Doglio <deleteman@gmail.com>",
+  "description": "Angular directive to link two fields based on their content",
+  "keywords": ["angular", "form", "field", "link", "binding", "event"],
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/deleteman/angular-linked-field"
+  }
+}
